@@ -1,12 +1,12 @@
 import Data.List
 import System.Directory
 import System.Environment
-import System.FilePath.Glob -- This module need to run 'cabal-install Glob'
+import System.FilePath.Glob
 import System.FilePath.Posix
 
 usage :: IO ()
 usage = do progName <- getProgName
-           putStrLn ("Usage:\n\t" ++ progName ++ " srcPattern dstPattern")
+           putStrLn ("Usage:\n\t" ++ progName ++ " \"srcPattern\" \"dstPattern\"")
 
 hasWildcard :: [Char] -> Bool
 hasWildcard name = 1 == (length $ filter (\x -> x == '*') name)
