@@ -10,13 +10,18 @@ name:                batch-rename
 -- PVP summary:      +-+------- breaking API changes
 --                   | | +----- non-breaking API additions
 --                   | | | +--- code changes with no API change
-version:             0.1.0.0
+version:             0.1.0.9
 
 -- A short (one-line) description of the package.
-synopsis:            A simple command make linux or macos do things like "rename *.mp3 *.mp4" in Windows/MSDOS
+synopsis:            Make Linux or MacOS do things like "rename *.mp3 *.mp4"
 
 -- A longer description of the package.
--- description:         
+description:      Do you remember the convenient command `ren' in MSDOS?
+                  When you want to change all your .mp3 files to .mp4.
+                  Simply type \"ren *.mp3 *.mp4.\". 
+                  I really like this.
+                  But in linux\/Mac world, people keep asking how.(http:\/\/bit.ly\/2cIskUu)
+                  So maybe this little tool can help you a lot.
 
 -- URL for the project homepage or repository.
 homepage:            https://github.com/uppet/batch_rename
@@ -60,9 +65,9 @@ executable batch_rename
   -- other-extensions:    
   
   -- Other library packages from which modules are imported.
-  build-depends:       base >=4.6 && <4.7,
-                       Glob >=0.7.11,
-                       filepath >=1.1,
+  build-depends:       base < 5,
+                       Glob,
+                       filepath >=1.0,
                        directory
   -- Directories containing source files.
   -- hs-source-dirs:      
