@@ -3,7 +3,7 @@ import Data.Maybe
 import System.Directory
 import System.Environment
 import System.FilePath.Glob
-import System.FilePath.Posix
+import System.FilePath
 
 usage :: IO ()
 usage = do progName <- getProgName
@@ -23,14 +23,13 @@ partRename preL posL preR posR name =
                       trimHeadTail fn preL posL ++
                       posR)
 
+fetchPrePos s = let idx = fromMaybe 0 (elemIndex '*' s) in
+  (take idx s, drop (idx + 1) s)
+
 batchRename :: String -> String -> IO ()
 batchRename left right = if hasWildcard left && hasWildcard right then
-                           let wildcardLeftIndex = fromMaybe 0 (elemIndex '*' left)
-                               oldPreLeft = take wildcardLeftIndex left 
-                               oldPosLeft = drop (wildcardLeftIndex + 1) left
-                               wildcardRightIndex = fromMaybe 0 (elemIndex '*' right)
-                               oldPreRight = take wildcardRightIndex right
-                               oldPosRight = drop (wildcardRightIndex + 1) right in
+                           let (oldPreLeft, oldPosLeft) = fetchPrePos left
+                               (oldPreRight, oldPosRight) = fetchPrePos right in
                              do files <- glob left
                                 mapM_ (partRename oldPreLeft oldPosLeft oldPreRight oldPosRight)
                                       files
